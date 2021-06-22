@@ -118,7 +118,26 @@ buttons.addEventListener('click', function (event) {
       }
     }
     if (action === 'operator') {
-      operatorForAdvanced = buttonContent;
+      if (operatorForAdvanced === '') {  //연산자 입력 안되어있을 경우
+        operatorForAdvanced = buttonContent;  // operatorForAdvanced 에 입력한 연산자 할당
+      }
+      else if(operatorForAdvanced === '+' || operatorForAdvanced === '-' || operatorForAdvanced === '*' || operatorForAdvanced === '/') {                              //연산자 입력되어 있는 경우
+        if (previousNum === '') {          //두번째 숫자가 입력되지 않은 경우
+          operatorForAdvanced = buttonContent;                                
+        }
+        else {                            //두번째 숫자가 있는 경우
+          if(previousKey === '') {
+            previousKey = calculate(firstNum, operatorForAdvanced, previousNum);    //처음 숫자와 두번째 숫자 계산
+            previousNum = '';                                                       //두번째 숫자 리셋
+            operatorForAdvanced = buttonContent;                                    //연산자 새로 할당
+          }
+          else {
+            previousKey = calculate(previousKey, operatorForAdvanced, previousNum);    //계산되었던 숫자와 두번째 숫자 계산
+            previousNum = '';                                                       //두번째 숫자 리셋
+            operatorForAdvanced = buttonContent;                                    //연산자 새로 할당
+          }
+        }
+      }
     }
     if (action === 'decimal') {
       if(operatorForAdvanced === '') {
