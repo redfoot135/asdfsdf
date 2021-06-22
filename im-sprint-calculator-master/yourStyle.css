@@ -26,21 +26,22 @@ body {
 }
 
 .calculator {
-  background-color: #4000c7;
+  background-color: #555659;
   width: 350px;
   height: 500px;
-  border-radius: 10px;
+  border-radius: 0px;
   padding: 30px 20px;
 }
 
 .calculator__display--bare {
-  /* display: none; */
-  background-color: #ffffff;
+  display: none;
+  background-color: #555659;
   text-align: center;
   vertical-align: middle;
   height: 100px;
   width: 100%;
-  border-radius: 10px;
+  border-radius: 0px;
+  border : 1px solid white;
   font-size: 20px;
   padding: 25px 15px;
   overflow: hidden;
@@ -54,17 +55,18 @@ body {
   margin: 5px;
   width: 40px;
   height: 45px;
-  border-radius: 10px;
+  border-radius: 0px;
   font-size: 20px;
   padding: 10px 5px;
 }
 
-.calculator__display--for-advanced {
-  display: none; /* 이 줄을 모두 지우면 advanced 테스트를 하실 수 있습니다.*/
-  background-color: #ffffff;
+.calculator__display--for-advanced { 
+  background-color: #555659;
   height: 100px;
   width: 100%;
-  border-radius: 10px;
+  border-radius: 0px;
+  border : 1px solid white;
+
   font-size: 20px;
   text-align: center;
   vertical-align: middle;
@@ -74,26 +76,30 @@ body {
 }
 
 .calculator__buttons {
-  background-color: #ffffff;
+  background-color: #555659;
+  border : 1px solid white;
   width: 100%;
   height: 330px;
   margin-top: 10px;
   padding: 10px;
-  border-radius: 10px;
+  border-radius: 0px;
 }
 
 .clear__and__enter {
   height: 50px;
   margin: 10px;
   background-color: #f3f0fc;
+  display: flex;
+  justify-content: space-between;
 }
 
 .clear__and__enter > button {
-  border-radius: 10px;
-  width: 50px;
-  height: 40px;
-  margin: 0px 5px;
-  background-color: #00da75;
+  border-radius: 0px;
+  width: 135px;
+  height: 50px;
+  border : 1px solid white;
+  margin: 0px 0px;
+  background-color: red;
   cursor: pointer;
   outline: none;
 }
@@ -102,12 +108,14 @@ body {
   height: 50px;
   margin: 10px;
   background-color: #f3f0fc;
+  display: flex;
+  justify-content: space-between;
 }
 
 .button__row > button {
-  width: 50px;
-  height: 40px;
-  border-radius: 10px;
+  width: 67.5px;
+  height: 50px;
+  border-radius: 0px;
   cursor: pointer;
   outline: none;
   background-color: #ebebeb;
@@ -119,7 +127,7 @@ body {
 }
 
 .button__row > .double {
-  width: 115px;
+  width: 135px;
 }
 
 .button__row > .isPressed {
