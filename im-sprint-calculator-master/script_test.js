@@ -121,12 +121,33 @@ buttons.addEventListener('click', function (event) {
       operatorForAdvanced = buttonContent;
     }
     if (action === 'decimal') {
-      if (firstNum.includes('.') === false) {
-        firstNum = firstNum + buttonContent;
-        display.textContent = firstNum;
+      if(operatorForAdvanced === '') {
+        if (firstNum.includes('.') === false) {
+          if(firstNum === '') {
+            firstNum = '0' + buttonContent;
+            display.textContent = firstNum;
+          }
+          else {firstNum = firstNum + buttonContent;
+            display.textContent = firstNum;
+          }
+        }
+        else {
+          // . 이 없을 시 아무 반응 없음.
+        }
       }
       else {
-        // . 이 없을 시 아무 반응 없음.
+        if (previousNum.includes('.') === false) {
+          if(previousNum === '') {
+            previousNum = '0' + buttonContent;
+            display.textContent = previousNum;
+          }
+          else {previousNum = previousNum + buttonContent;
+            display.textContent = previousNum;
+          }
+        }
+        else {
+          // . 이 없을 시 아무 반응 없음.
+        }
       }
     }
     if (action === 'clear') {
@@ -139,16 +160,28 @@ buttons.addEventListener('click', function (event) {
     }
     if (action === 'calculate') {
       if (operatorForAdvanced === ''){
-
+        
       }
       else {
         if (previousKey === '') {
-          previousKey = calculate(firstNum, operatorForAdvanced, previousNum);
-          display.textContent = previousKey;
+          if(previousNum === '') {
+            previousKey = calculate(firstNum, operatorForAdvanced, firstNum);
+            display.textContent = previousKey;
+          }
+          else {
+            previousKey = calculate(firstNum, operatorForAdvanced, previousNum);
+            display.textContent = previousKey;
+          }
         }
         else {
-          previousKey = calculate(previousKey, operatorForAdvanced, previousNum);
-          display.textContent = previousKey;
+          if(previousNum === ''){
+            previousKey = calculate(previousKey, operatorForAdvanced, firstNum);
+            display.textContent = previousKey;
+          }
+          else {
+            previousKey = calculate(previousKey, operatorForAdvanced, previousNum);
+            display.textContent = previousKey;
+          }
         }
       }
     }

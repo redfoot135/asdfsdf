@@ -87,7 +87,7 @@ buttons.addEventListener('click', function (event) {
   // ! 위 코드는 수정하지 마세요.
 
   // ! 여기서부터 Advanced Challenge & Nightmare 과제룰 풀어주세요.
-  if (target.matches('button')) {
+  if (target.matches('button')) {  //버튼을 눌러줍니다.
     if (action === 'number') {}
     if (action === 'operator') {}
     if (action === 'decimal') {}
