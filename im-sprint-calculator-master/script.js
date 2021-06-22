@@ -27,7 +27,6 @@ function calculate(n1, operator, n2) {
 
 buttons.addEventListener('click', function (event) {
   // 버튼을 눌렀을 때 작동하는 함수입니다.
-
   const target = event.target; // 클릭된 HTML 엘리먼트의 정보가 저장되어 있습니다.
   const action = target.classList[0]; // 클릭된 HTML 엘리먼트에 클레스 정보를 가져옵니다.
   const buttonContent = target.textContent; // 클릭된 HTML 엘리먼트의 텍스트 정보를 가져옵니다.
@@ -76,7 +75,7 @@ buttons.addEventListener('click', function (event) {
 // ! Advanced Challenge test와 Nightmare test를 위해서는 아래 주석을 해제하세요.
 
 const display = document.querySelector('.calculator__display--for-advanced'); // calculator__display 엘리먼트와, 그 자식 엘리먼트의 정보를 모두 담고 있습니다.
-let firstNum, operatorForAdvanced, previousKey, previousNum;
+let firstNum = '', operatorForAdvanced = '', previousKey = '', previousNum = '';
 
 buttons.addEventListener('click', function (event) {
   // 버튼을 눌렀을 때 작동하는 함수입니다.
@@ -87,12 +86,124 @@ buttons.addEventListener('click', function (event) {
   // ! 위 코드는 수정하지 마세요.
 
   // ! 여기서부터 Advanced Challenge & Nightmare 과제룰 풀어주세요.
-  if (target.matches('button')) {  //버튼을 눌러줍니다.
-    if (action === 'number') {}
-    if (action === 'operator') {}
-    if (action === 'decimal') {}
-    if (action === 'clear') {}
-    if (action === 'calculate') {}
+  if (target.matches('button')) {  // 버튼이 눌러집니다.
+    if (action === 'number') {  // 숫자 버튼을 누른 경우
+      if (operatorForAdvanced === '') {
+        if (firstNum === '') {  // 아무 것도 입력되어 있지 않은 경우
+          if(buttonContent === '0') {  // 아무것도 입력되지 않은 상태에서 0을 입력한 경우 반응하지 않음.
+          }
+          else {console.log('숫자 ' + buttonContent + ' 버튼'); // 아무것도 입력되지 않은 상태에서 숫자(0제외)를 입력한 경우
+          firstNum = firstNum + buttonContent;  // firstNum에 입력된 수 더함.
+          display.textContent = firstNum;  // 디스플레이에 firstNum 표시.
+        }
+        }
+        else {  // firstNum에 이미 무언가 입력된 경우
+          firstNum = firstNum + buttonContent;  // firstNum에 새로 입력된 숫자를 더함.
+          display.textContent = firstNum;  // firstNum을 디스플레이에 표시.
+        }
+      }
+      else {
+        if (previousNum === '') {  // 아무 것도 입력되어 있지 않은 경우
+          if(buttonContent === '0') {  // 아무것도 입력되지 않은 상태에서 0을 입력한 경우 반응하지 않음.
+          }
+          else {console.log('숫자 ' + buttonContent + ' 버튼'); // 아무것도 입력되지 않은 상태에서 숫자(0제외)를 입력한 경우
+          previousNum = previousNum + buttonContent;  // firstNum에 입력된 수 더함.
+          display.textContent = previousNum;  // 디스플레이에 firstNum 표시.
+          }
+        }
+        else {  // firstNum에 이미 무언가 입력된 경우
+          previousNum = previousNum + buttonContent;  // firstNum에 새로 입력된 숫자를 더함.
+          display.textContent = previousNum;  // firstNum을 디스플레이에 표시.
+          }
+      }
+    }
+    if (action === 'operator') {
+      if (operatorForAdvanced === '') {  //연산자 입력 안되어있을 경우
+        operatorForAdvanced = buttonContent;  // operatorForAdvanced 에 입력한 연산자 할당
+      }
+      else if(operatorForAdvanced === '+' || operatorForAdvanced === '-' || operatorForAdvanced === '*' || operatorForAdvanced === '/') {                              //연산자 입력되어 있는 경우
+        if (previousNum === '') {          //두번째 숫자가 입력되지 않은 경우
+          operatorForAdvanced = buttonContent;                                
+        }
+        else {                            //두번째 숫자가 있는 경우
+          if(previousKey === '') {
+            previousKey = calculate(firstNum, operatorForAdvanced, previousNum);    //처음 숫자와 두번째 숫자 계산
+            previousNum = '';                                                       //두번째 숫자 리셋
+            operatorForAdvanced = buttonContent;                                    //연산자 새로 할당
+          }
+          else {
+            previousKey = calculate(previousKey, operatorForAdvanced, previousNum);    //계산되었던 숫자와 두번째 숫자 계산
+            previousNum = '';                                                       //두번째 숫자 리셋
+            operatorForAdvanced = buttonContent;                                    //연산자 새로 할당
+          }
+        }
+      }
+    }
+    if (action === 'decimal') {
+      if(operatorForAdvanced === '') {
+        if (firstNum.includes('.') === false) {
+          if(firstNum === '') {
+            firstNum = '0' + buttonContent;
+            display.textContent = firstNum;
+          }
+          else {firstNum = firstNum + buttonContent;
+            display.textContent = firstNum;
+          }
+        }
+        else {
+          // . 이 없을 시 아무 반응 없음.
+        }
+      }
+      else {
+        if (previousNum.includes('.') === false) {
+          if(previousNum === '') {
+            previousNum = '0' + buttonContent;
+            display.textContent = previousNum;
+          }
+          else {previousNum = previousNum + buttonContent;
+            display.textContent = previousNum;
+          }
+        }
+        else {
+          // . 이 없을 시 아무 반응 없음.
+        }
+      }
+    }
+    if (action === 'clear') {
+      firstNum = '';
+      operatorForAdvanced = '';
+      previousNum = '';
+      previousKey = '';
+      display.textContent = '0';
+
+    }
+    if (action === 'calculate') {
+      if (operatorForAdvanced === ''){
+        
+      }
+      else {
+        if (previousKey === '') {
+          if(previousNum === '') {
+            previousKey = calculate(firstNum, operatorForAdvanced, firstNum);
+            display.textContent = previousKey;
+          }
+          else {
+            previousKey = calculate(firstNum, operatorForAdvanced, previousNum);
+            display.textContent = previousKey;
+          }
+        }
+        else {
+          if(previousNum === ''){
+            previousKey = calculate(previousKey, operatorForAdvanced, firstNum);
+            display.textContent = previousKey;
+          }
+          else {
+            previousKey = calculate(previousKey, operatorForAdvanced, previousNum);
+            display.textContent = previousKey;
+          }
+        }
+      }
+    }
   }
 
 });
